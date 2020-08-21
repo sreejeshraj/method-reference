@@ -71,6 +71,10 @@ public class Main {
         System.out.println(car2);
 
         myMethod("white", Car::new);
+        myMethod("white", colour -> {
+            System.out.println("This is inside method argument of a lambda!");
+            return new Car(colour);
+        });
 
         Consumer<Car> carConsumerDriving2 = car -> car.drive();
         Consumer<Car> carConsumerDriving = Car::drive;
@@ -93,7 +97,6 @@ public class Main {
         myExistingCar.drive();
 
 
-
         Runnable carRunnable2 = () -> myExistingCar.drive();
         Runnable carRunnable3 = myExistingCar::drive;
 
@@ -104,7 +107,6 @@ public class Main {
         Supplier<String> toStringSupplier4 = myExistingCar::getColour;
 
 
-
     }
 
 
@@ -112,16 +114,15 @@ public class Main {
         List<Boolean> booleanList = new ArrayList<>();
 
         for (MySpecialNumber mySpecialNumber : mySpecialNumberList) {
-        //    boolean IsMySpecialNumberDivisibleBy = mySpecialNumber.isMySpecialNumberDivisibleBy(otherNumber);
-            boolean IsMySpecialNumberDivisibleBy = biFunction.apply(mySpecialNumber,otherNumber);
+            //    boolean IsMySpecialNumberDivisibleBy = mySpecialNumber.isMySpecialNumberDivisibleBy(otherNumber);
+            boolean IsMySpecialNumberDivisibleBy = biFunction.apply(mySpecialNumber, otherNumber);
             booleanList.add(IsMySpecialNumberDivisibleBy);
         }
 
         return booleanList;
     }
 
-    public static void myMethod(String colour, Function<String, Car> carFunction)
-    {
+    public static void myMethod(String colour, Function<String, Car> carFunction) {
         carFunction.apply(colour);
     }
 
