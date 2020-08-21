@@ -78,6 +78,10 @@ public class Main {
         carConsumerDriving.accept(new Car());
         carConsumerDriving.accept(carSupplier.get());
 
+//        The below line will cause error at line 82
+//        Car car3 = new Car();
+        Consumer<Car> carConsumerDriving3 = car3 -> car3.drive();
+
 
         Runnable carRunnable = car1::drive;
         carRunnable.run();
