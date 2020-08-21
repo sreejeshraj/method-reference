@@ -72,10 +72,12 @@ public class Main {
 
         myMethod("white", Car::new);
 
+        Consumer<Car> carConsumerDriving2 = car -> car.drive();
         Consumer<Car> carConsumerDriving = Car::drive;
         carConsumerDriving.accept(car1);
         carConsumerDriving.accept(new Car());
         carConsumerDriving.accept(carSupplier.get());
+
 
         Runnable carRunnable = car1::drive;
         carRunnable.run();
