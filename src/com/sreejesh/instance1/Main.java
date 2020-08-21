@@ -70,6 +70,8 @@ public class Main {
         Car car2 = carFunction.apply("red");
         System.out.println(car2);
 
+        myMethod("white", Car::new);
+
         Consumer<Car> carConsumerDriving = Car::drive;
         carConsumerDriving.accept(car1);
         carConsumerDriving.accept(new Car());
@@ -110,6 +112,11 @@ public class Main {
         }
 
         return booleanList;
+    }
+
+    public static void myMethod(String colour, Function<String, Car> carFunction)
+    {
+        carFunction.apply(colour);
     }
 
 
