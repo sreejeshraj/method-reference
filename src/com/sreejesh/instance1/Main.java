@@ -81,6 +81,22 @@ public class Main {
         Supplier<String> carSupplier2 = car2::getColour;
         System.out.println(carSupplier2.get());
 
+        Car myExistingCar = new Car();
+        myExistingCar.drive();
+
+
+
+        Runnable carRunnable2 = () -> myExistingCar.drive();
+        Runnable carRunnable3 = myExistingCar::drive;
+
+        Supplier<String> toStringSupplier = () -> myExistingCar.toString();
+        Supplier<String> toStringSupplier2 = myExistingCar::toString;
+
+        Supplier<String> toStringSupplier3 = () -> myExistingCar.getColour();
+        Supplier<String> toStringSupplier4 = myExistingCar::getColour;
+
+
+
     }
 
 
