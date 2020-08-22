@@ -139,7 +139,7 @@ public class Main {
 
 //  intellij will NOT suggest method reference in the following case. The order is very important!
         TriFunction<MyStringConcatenator, String, String, String> myStringConcatenatorTriFunction4
-                = (myStringConcatenator, firstString, secondString) -> myStringConcatenator.concat(secondString, firstString);
+                = (MyStringConcatenator myStringConcatenator, String firstString,String secondString) -> myStringConcatenator.concat(secondString, firstString);
 
         String myConcatenatedString4 = myStringConcatenatorTriFunction4.apply(johnMyStringConcatenator,"one","two");
         System.out.println(myConcatenatedString4);
