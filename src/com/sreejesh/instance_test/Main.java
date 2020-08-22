@@ -82,7 +82,7 @@ public class Main {
         carConsumerDriving.accept(new Car());
         carConsumerDriving.accept(carSupplier.get());
 
-//        The below line will cause error at line 82
+//        The below line will cause error at Consumer<Car> carConsumerDriving3 = car3 -> car3.drive(); car3 will be duplicate!
 //        Car car3 = new Car();
         Consumer<Car> carConsumerDriving3 = car3 -> car3.drive();
 
