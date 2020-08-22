@@ -123,26 +123,41 @@ public class Main {
         TriFunction<MyStringConcatenator, String, String, String> myStringConcatenatorTriFunction1
                 = (myStringConcatenator, firstString, secondString) -> myStringConcatenator.concat(firstString, secondString);
 
-        String myConcatenatedString1 = myStringConcatenatorTriFunction1.apply(johnMyStringConcatenator, "one","two");
+        String myConcatenatedString1 = myStringConcatenatorTriFunction1.apply(johnMyStringConcatenator, "one", "two");
         System.out.println(myConcatenatedString1);
 
         TriFunction<MyStringConcatenator, String, String, String> myStringConcatenatorTriFunction2
                 = MyStringConcatenator::concat;
-        String myConcatenatedString2 = myStringConcatenatorTriFunction1.apply(johnMyStringConcatenator, "one","two");
+        String myConcatenatedString2 = myStringConcatenatorTriFunction1.apply(johnMyStringConcatenator, "one", "two");
         System.out.println(myConcatenatedString2);
 
 
         TriFunction<MyStringConcatenator, String, String, String> myStringConcatenatorTriFunction3
                 = (myStringConcatenator, firstString, secondString) -> myStringConcatenator.concat(secondString, firstString);
-        String myConcatenatedString3 = myStringConcatenatorTriFunction3.apply(johnMyStringConcatenator, "one","two");
+        String myConcatenatedString3 = myStringConcatenatorTriFunction3.apply(johnMyStringConcatenator, "one", "two");
         System.out.println(myConcatenatedString3);
 
 //  intellij will NOT suggest method reference in the following case. The order is very important!
         TriFunction<MyStringConcatenator, String, String, String> myStringConcatenatorTriFunction4
-                = (MyStringConcatenator myStringConcatenator, String firstString,String secondString) -> myStringConcatenator.concat(secondString, firstString);
+                = (MyStringConcatenator myStringConcatenator, String firstString, String secondString) -> myStringConcatenator.concat(secondString, firstString);
 
-        String myConcatenatedString4 = myStringConcatenatorTriFunction4.apply(johnMyStringConcatenator,"one","two");
+        String myConcatenatedString4 = myStringConcatenatorTriFunction4.apply(johnMyStringConcatenator, "one", "two");
         System.out.println(myConcatenatedString4);
+
+        BiFunction<String, String, String> testBiFunction1 = (firstString, secondString) -> Main.testStaticMethodOrder(firstString, secondString);
+        String pipeAppendedString1 = testBiFunction1.apply("one", "two");
+        System.out.println(pipeAppendedString1);
+
+        BiFunction<String, String, String> testBiFunction2 = Main::testStaticMethodOrder;
+        String pipeAppendedString2 = testBiFunction2.apply("one", "two");
+        System.out.println(pipeAppendedString2);
+
+//      intellij will NOT suggest method reference in the following case. The order is very important!
+        BiFunction<String, String, String> testBiFunction3 = (firstString, secondString) -> Main.testStaticMethodOrder(secondString, firstString);
+        String pipeAppendedString3 = testBiFunction3.apply("one", "two");
+        System.out.println(pipeAppendedString3);
+       /* Function<String, Car> carFunction2 = color -> new Car();
+        BiConsumer<String, Function<String, Car>> myBiConsumer = (colour, carFunction2) ->*/
     }
 
 
@@ -162,6 +177,10 @@ public class Main {
         carFunction.apply(colour);
     }
 
+
+    public static String testStaticMethodOrder(String firstString, String secondString) {
+        return firstString + "|" + secondString;
+    }
 
 
 }
