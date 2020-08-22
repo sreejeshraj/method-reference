@@ -1,4 +1,4 @@
-package com.sreejesh.instance1;
+package com.sreejesh.instance_test;
 
 import java.util.ArrayList;
 import java.util.List;

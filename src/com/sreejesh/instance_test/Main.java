@@ -1,4 +1,4 @@
-package com.sreejesh.instance1;
+package com.sreejesh.instance_test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -106,7 +106,43 @@ public class Main {
         Supplier<String> toStringSupplier3 = () -> myExistingCar.getColour();
         Supplier<String> toStringSupplier4 = myExistingCar::getColour;
 
+        MyStringConcatenator johnMyStringConcatenator = new MyStringConcatenator("JohnConcat");
+        BiFunction<MyStringConcatenator, String, String> myStringConcatenatorBiFunction1 = (myStringConcatenator, welcomeMessage) -> myStringConcatenator.welcomeMyself(welcomeMessage);
+        String welComeMessage1 = myStringConcatenatorBiFunction1.apply(johnMyStringConcatenator, "Hello");
+        System.out.println(welComeMessage1);
 
+        BiFunction<MyStringConcatenator, String, String> myStringConcatenatorBiFunction2 = MyStringConcatenator::welcomeMyself;
+        String welComeMessage2 = myStringConcatenatorBiFunction1.apply(johnMyStringConcatenator, "Hello");
+        System.out.println(welComeMessage2);
+
+//  intellij will NOT suggest method reference in the following case. The order is very important!
+        BiFunction<String, MyStringConcatenator, String> myStringConcatenatorBiFunction3 = (welcomeMessage, myStringConcatenator) -> myStringConcatenator.welcomeMyself(welcomeMessage);
+        String welComeMessage3 = myStringConcatenatorBiFunction3.apply("Hello Mr", johnMyStringConcatenator);
+        System.out.println(welComeMessage3);
+
+        TriFunction<MyStringConcatenator, String, String, String> myStringConcatenatorTriFunction1
+                = (myStringConcatenator, firstString, secondString) -> myStringConcatenator.concat(firstString, secondString);
+
+        String myConcatenatedString1 = myStringConcatenatorTriFunction1.apply(johnMyStringConcatenator, "one","two");
+        System.out.println(myConcatenatedString1);
+
+        TriFunction<MyStringConcatenator, String, String, String> myStringConcatenatorTriFunction2
+                = MyStringConcatenator::concat;
+        String myConcatenatedString2 = myStringConcatenatorTriFunction1.apply(johnMyStringConcatenator, "one","two");
+        System.out.println(myConcatenatedString2);
+
+
+        TriFunction<MyStringConcatenator, String, String, String> myStringConcatenatorTriFunction3
+                = (myStringConcatenator, firstString, secondString) -> myStringConcatenator.concat(secondString, firstString);
+        String myConcatenatedString3 = myStringConcatenatorTriFunction3.apply(johnMyStringConcatenator, "one","two");
+        System.out.println(myConcatenatedString3);
+
+//  intellij will NOT suggest method reference in the following case. The order is very important!
+        TriFunction<MyStringConcatenator, String, String, String> myStringConcatenatorTriFunction4
+                = (myStringConcatenator, firstString, secondString) -> myStringConcatenator.concat(secondString, firstString);
+
+        String myConcatenatedString4 = myStringConcatenatorTriFunction4.apply(johnMyStringConcatenator,"one","two");
+        System.out.println(myConcatenatedString4);
     }
 
 
@@ -125,6 +161,7 @@ public class Main {
     public static void myMethod(String colour, Function<String, Car> carFunction) {
         carFunction.apply(colour);
     }
+
 
 
 }

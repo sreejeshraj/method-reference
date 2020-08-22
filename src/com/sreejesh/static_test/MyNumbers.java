@@ -1,4 +1,4 @@
-package com.sreejesh.static1;
+package com.sreejesh.static_test;
 
 import java.util.ArrayList;
 import java.util.List;
